@@ -41,17 +41,18 @@ class ConfiguracaoController extends Controller
 		$configPdv = new ConfigPdv();
 		$configPdv = $configPdv->ConfigPdv($this->idEmpresa);
 
-		$this->view('configuracao/index', $this->layout, 
+		$this->view('configuracao/index', $this->layout,
 			compact(
-				'tiposPdv', 
+				'tiposPdv',
 				'configPdv'
-			));
+			)
+    )->title('Configurações');
 	}
 
 	public function alterarConfigPdv()
 	{
 		if ($this->post->hasPost()) {
-            
+
             $idConfigPdv = $this->post->data()->idConfigPdv;
 			$idTipoPdv = $this->post->data()->idTipoPdv;
 
@@ -63,7 +64,7 @@ class ConfiguracaoController extends Controller
 				$configPdv->update($dados, $dadosConfigPdv->id);
 				echo json_encode(['status' => true]);
 
-			} catch(\Exception $e) { 
+			} catch(\Exception $e) {
     		    dd($e->getMessage());
     	    }
 		}

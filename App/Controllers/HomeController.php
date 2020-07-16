@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Controllers;
 use System\Controller\Controller;
 use System\Post\Post;
@@ -17,7 +17,7 @@ class HomeController extends Controller
 	protected $idEmpresa;
 	protected $idUsuario;
 	protected $idPerfilUsuarioLogado;
-	
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -63,8 +63,8 @@ class HomeController extends Controller
         $valorDeVendasRealizadasPorDia = $vendasRepository->valorDeVendasRealizadasPorDia(
             [], $this->idEmpresa
         );
-        
-		$this->view('home/index', $this->layout, 
+
+		$this->view('home/index', $this->layout,
 			compact(
 				'faturamentoDeVandasNoMes',
 				'faturamentoDeVandasNoDia',
@@ -73,6 +73,7 @@ class HomeController extends Controller
 				'percentualMeiosDePagamento',
 				'quantidadeDeVendasRealizadasPorDia',
 				'valorDeVendasRealizadasPorDia'
-			));
+			)
+    )->title('Home');
 	}
 }

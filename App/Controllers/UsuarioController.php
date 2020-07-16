@@ -48,7 +48,7 @@ class UsuarioController extends Controller
 			$this->idPerfilUsuarioLogado
 		);
 
-		$this->view('usuario/index', $this->layout, compact('usuarios'));
+		$this->view('usuario/index', $this->layout, compact('usuarios'))->title('Usuários');
 	}
 
 	public function save()

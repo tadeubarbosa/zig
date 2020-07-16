@@ -1,4 +1,4 @@
-<?php 
+<?php
 use System\Session\Session;
 use App\Models\ConfigPdv;
 use App\Config\ConfigPerfil;
@@ -16,6 +16,11 @@ $configPdv = $configPdv->configPdv(Session::get('idEmpresa'));
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <link rel="shortcut icon" href="public/img/favicon.png" />
   <title>
+    <?php
+      if ($this->getTitle()) {
+        echo $this->getTitle() . " | ";
+      }
+    ?>
     Zig Money
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
@@ -77,18 +82,18 @@ $configPdv = $configPdv->configPdv(Session::get('idEmpresa'));
       <div class="logo">
         <a href="http://www.creative-tim.com" class="simple-text logo-mini">
           <div class="logo-image-small">
-            
+
           </div>
         </a>
         <a href="<?php echo BASEURL;?>/pdvDiferencial" class="simple-text logo-normal">
           <span style="color:#00cc66;">&nbsp;&nbsp;&nbsp;
             <i class="fas fa-dollar-sign"></i> <b style="opacity:0.70">TONIE</b>
           </span>
-          <!--<span>Zig</span> 
+          <!--<span>Zig</span>
           <span>Money</span>-->
         </a>
       </div>
-    
+
       <!--Carrega o menu lateral da aplicação-->
       <?php require_once('menuLeft.php');?>
 
@@ -107,9 +112,9 @@ $configPdv = $configPdv->configPdv(Session::get('idEmpresa'));
                   <span class="navbar-toggler-bar bar3"></span>
                 </button>
               </div>
-              <a class="navbar-brand" href="<?php echo BASEURL;?>/usuario" 
+              <a class="navbar-brand" href="<?php echo BASEURL;?>/usuario"
                 style="text-transform:lowercase!important;">
-              
+
                 <?php $imagemPerfil = Session::get('imagem');?>
                 <?php if ($imagemPerfil != false):?>
                   <img class="perfil" src="<?php echo BASEURL .'/'. Session::get('imagem')?>">
@@ -132,7 +137,7 @@ $configPdv = $configPdv->configPdv(Session::get('idEmpresa'));
                   <li class="nav-item btn-rotate dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="nc-icon nc-settings-gear-65"></i>
-                    
+
                   </a>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                     <!--<a class="dropdown-item" href="#">Meus dados</a>-->
@@ -140,20 +145,20 @@ $configPdv = $configPdv->configPdv(Session::get('idEmpresa'));
                     <a class="dropdown-item" href="<?php echo BASEURL;?>/usuario">
                       <i class="fas fa-users"></i> Usuários
                     </a>
-                    
+
                     <!--Modulo Empresas-->
                     <?php if (Session::get('idPerfil') == 1):?>
                       <a class="dropdown-item" href="<?php echo BASEURL;?>/empresa">
                         <i class="fas fa-store"></i> Empresas
                       </a>
                     <?php endif;?>
-                    
+
                     <?php if (Session::get('idPerfil') != ConfigPerfil::vendedor()):?>
                       <a class="dropdown-item" href="<?php echo BASEURL;?>/configuracao">
                         <i class="fas fa-cogs"></i> Configurações
                       </a>
                     <?php endif;?>
-                    
+
                     <?php if (Session::get('idPerfil') != ConfigPerfil::vendedor()):?>
                       <a class="dropdown-item" href="<?php echo BASEURL; ?>/logs">
                         <i class="fas fa-file-signature"></i> Logs de acessos
@@ -172,7 +177,7 @@ $configPdv = $configPdv->configPdv(Session::get('idEmpresa'));
           </div>
         </nav>
         <!-- End Navbar -->
-        
+
         <div class="content">
           <!--Include the content into the layout-->
           <?php $this->viewRender();?>
@@ -183,7 +188,7 @@ $configPdv = $configPdv->configPdv(Session::get('idEmpresa'));
 </div>
 
 
-  <div id="modal-validacao" class="modal fade bd-example-modal-lg" role="dialog" 
+  <div id="modal-validacao" class="modal fade bd-example-modal-lg" role="dialog"
   style="background: rgba(00, 00, 00, 0.6);">
       <div class="modal-dialog" data-backdrop="static">
           <!-- Modal content-->
@@ -192,16 +197,16 @@ $configPdv = $configPdv->configPdv(Session::get('idEmpresa'));
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                   <!--<h4 class="modal-title"></h4>-->
               </div>
-   
+
               <div class="modal-body">
                   <div id="modal-body-content">
                       <p id="p-modal-validation"></p>
-                  </div> 
-              </div>   
+                  </div>
+              </div>
           </div>
       </div>
   </div>
-    
+
   <script src="<?php echo BASEURL;?>/public/assets/js/core/jquery.min.js"></script>
   <script src="<?php echo BASEURL;?>/public/assets/js/core/popper.min.js"></script>
   <script src="<?php echo BASEURL;?>/public/assets/js/core/bootstrap.min.js"></script>
@@ -214,9 +219,9 @@ $configPdv = $configPdv->configPdv(Session::get('idEmpresa'));
     $(function() {
         jQuery('.campo-moeda')
         .maskMoney({
-          prefix:'R$ ', 
-          allowNegative: false, 
-          thousands:'.', decimal:',', 
+          prefix:'R$ ',
+          allowNegative: false,
+          thousands:'.', decimal:',',
           affixesStay: false
         });
 

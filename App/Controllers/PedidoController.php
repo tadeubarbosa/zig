@@ -26,7 +26,7 @@ class PedidoController extends Controller
 
 	public function index()
 	{
-		$this->view('pedido/index', $this->layout);
+		$this->view('pedido/index', $this->layout)->title('Pedidos');
 	}
 
 	public function save()

@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Controllers;
 use System\Controller\Controller;
 use System\Post\Post;
@@ -20,7 +20,7 @@ class RelatorioController extends Controller
 	protected $layout;
 	protected $idEmpresa;
 	protected $idPerfilUsuarioLogado;
-	
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -37,7 +37,7 @@ class RelatorioController extends Controller
 
 	public function index()
 	{
-		$this->view('relatorio/index', $this->layout); 	
+		$this->view('relatorio/index', $this->layout)->title('Relatório');
 	}
 
 	public function vendasPorPeriodo()
@@ -45,7 +45,7 @@ class RelatorioController extends Controller
 		$usuario = new Usuario();
 		$usuarios = $usuario->usuarios($this->idEmpresa, $this->idPerfilUsuarioLogado);
 
-		$this->view('relatorio/vendasPorPeriodo/index', $this->layout, compact('usuarios'));
+		$this->view('relatorio/vendasPorPeriodo/index', $this->layout, compact('usuarios'))->title('Vendas por período');
 	}
 
 	public function vendasChamadaAjax()
@@ -64,25 +64,25 @@ class RelatorioController extends Controller
 			}
 
 			$vendas = $relatorioVendas->vendasPorPeriodo(
-				['de' => $de, 'ate' => $ate], 
+				['de' => $de, 'ate' => $ate],
 				$idUsuario,
 				$this->idEmpresa
 		    );
 
 			$meiosDePagamento = $relatorioVendas->totalVendidoPorMeioDePagamento(
-				['de' => $de, 'ate' => $ate], 
+				['de' => $de, 'ate' => $ate],
 				$idUsuario,
 				$this->idEmpresa
 			);
 
 			$totalDasVendas = $relatorioVendas->totalDasVendas(
-				['de' => $de, 'ate' => $ate], 
+				['de' => $de, 'ate' => $ate],
 				$idUsuario,
 				$this->idEmpresa
 			);
 		}
 
-		$this->view('relatorio/vendasPorPeriodo/tabelaVendasPorPeriodo', false, 
+		$this->view('relatorio/vendasPorPeriodo/tabelaVendasPorPeriodo', false,
 			compact(
 				'vendas',
 				'meiosDePagamento',
@@ -94,7 +94,7 @@ class RelatorioController extends Controller
 	{
     $relatorioVendas = new RelatorioVendasPorPeriodoRepository();
     $periodo = [
-      'de'  => $this->get->position(0), 
+      'de'  => $this->get->position(0),
       'ate' => $this->get->position(1)
     ];
     $idUsuario = ($this->get->position(2) == 'todos') ? false : $this->get->position(2);
@@ -105,10 +105,10 @@ class RelatorioController extends Controller
 	{
     $relatorioVendas = new RelatorioVendasPorPeriodoRepository();
     $periodo = [
-      'de'  => $this->get->position(0), 
+      'de'  => $this->get->position(0),
       'ate' => $this->get->position(1)
     ];
-    
+
     $idUsuario = ($this->get->position(2) == 'todos') ? false : $this->get->position(2);
 		$relatorioVendas->gerarRelatioDeVendasPorPeriodoPDF($periodo, $idUsuario, $this->idEmpresa);
 	}

@@ -33,7 +33,7 @@ class LogAcessoController extends Controller
       $log->hora = date('H:i', strtotime($log->created_at)) . 'h';
     }
 
-    $this->view('logs/index', $this->layout, compact("logs"));
+    $this->view('logs/index', $this->layout, compact("logs"))->title('Logs');
   }
 
 }

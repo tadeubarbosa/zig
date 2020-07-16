@@ -35,7 +35,7 @@ class ProdutoController extends Controller
 		$produto = new Produto();
 		$produtos = $produto->produtos($this->idEmpresa);
 
-		$this->view('produto/index', $this->layout, compact('produtos'));
+		$this->view('produto/index', $this->layout, compact('produtos'))->title('Produtos');
 	}
 
 	public function save()

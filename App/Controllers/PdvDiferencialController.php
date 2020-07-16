@@ -53,7 +53,8 @@ class PdvDiferencialController extends Controller
 			compact(
 				'meiosPagamentos',
 				'produtos'
-			));
+			)
+    )->title('PDV Diferencial');
 	}
 
 	public function saveVendasViaSession()

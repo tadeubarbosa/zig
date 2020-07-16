@@ -39,7 +39,7 @@ class ClienteController extends Controller
 		$cliente = new Cliente();
 		$clientes = $cliente->clientes($this->idEmpresa);
 
-		$this->view('cliente/index', $this->layout, compact("clientes"));
+		$this->view('cliente/index', $this->layout, compact("clientes"))->title('Clientes');
 	}
 
 	public function save()
